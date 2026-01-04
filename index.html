@@ -89,29 +89,43 @@
 <script>
   function createSnowflake() {
     const snowflake = document.createElement('div');
-    snowflake.innerHTML = '❄';
+    // Используем разные символы снежинок для разнообразия
+    const icons = ['❄', '❅', '❆', '✻'];
+    snowflake.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+    
     snowflake.style.position = 'fixed';
     snowflake.style.top = '-20px';
     snowflake.style.left = Math.random() * window.innerWidth + 'px';
-    snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-    snowflake.style.color = '#fff';
-    snowflake.style.opacity = Math.random();
+    snowflake.style.fontSize = (Math.random() * 15 + 10) + 'px';
+    
+    // Делаем снег цветным (оттенки голубого и синего), чтобы его было видно на белом
+    const colors = ['#add8e6', '#87ceeb', '#00bfff', '#4682b4'];
+    snowflake.style.color = colors[Math.floor(Math.random() * colors.length)];
+    
+    // Добавляем небольшое свечение/тень, чтобы снежинка не терялась
+    snowflake.style.textShadow = '0 0 5px rgba(255,255,255,0.8)';
+    
+    snowflake.style.opacity = Math.random() * 0.7 + 0.3;
     snowflake.style.zIndex = '9999';
     snowflake.style.pointerEvents = 'none';
-    snowflake.style.transition = `transform ${Math.random() * 3 + 2}s linear, top ${Math.random() * 3 + 2}s linear`;
+    snowflake.style.transition = `transform ${Math.random() * 4 + 3}s linear, top ${Math.random() * 4 + 3}s linear`;
     
     document.body.appendChild(snowflake);
 
+    // Запускаем анимацию падения
     setTimeout(() => {
-      snowflake.style.transform = `translateX(${Math.random() * 100 - 50}px)`;
+      snowflake.style.transform = `translateX(${Math.random() * 200 - 100}px) rotate(${Math.random() * 360}deg)`;
       snowflake.style.top = window.innerHeight + 20 + 'px';
     }, 100);
 
+    // Удаляем снежинку после падения
     setTimeout(() => {
       snowflake.remove();
-    }, 5000);
+    }, 7000);
   }
-  setInterval(createSnowflake, 150);
+
+  // Создаем снежинку каждые 200мс
+  setInterval(createSnowflake, 200);
 </script>
 </body>
 </html>
