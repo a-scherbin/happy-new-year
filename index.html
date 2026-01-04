@@ -86,6 +86,32 @@
             </td>
         </tr>
     </table>
+<script>
+  function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.innerHTML = '❄';
+    snowflake.style.position = 'fixed';
+    snowflake.style.top = '-20px';
+    snowflake.style.left = Math.random() * window.innerWidth + 'px';
+    snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+    snowflake.style.color = '#fff';
+    snowflake.style.opacity = Math.random();
+    snowflake.style.zIndex = '9999';
+    snowflake.style.pointerEvents = 'none';
+    snowflake.style.transition = `transform ${Math.random() * 3 + 2}s linear, top ${Math.random() * 3 + 2}s linear`;
+    
+    document.body.appendChild(snowflake);
 
+    setTimeout(() => {
+      snowflake.style.transform = `translateX(${Math.random() * 100 - 50}px)`;
+      snowflake.style.top = window.innerHeight + 20 + 'px';
+    }, 100);
+
+    setTimeout(() => {
+      snowflake.remove();
+    }, 5000);
+  }
+  setInterval(createSnowflake, 150);
+</script>
 </body>
 </html>
